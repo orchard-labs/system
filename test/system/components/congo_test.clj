@@ -6,7 +6,7 @@
    [somnium.congomongo :as cg]))
 
 
-;(def mongo-db-prod (new-mongo-db "mongodb://127.0.0.1/mongo-test4"))
+;(def mongo-db-prod (new-mongo-db "mongodb://127.0.0.1/congo-test4"))
 (def mongo-db-dev (new-mongo-db))
 
 ;; (deftest mongo-production
@@ -19,8 +19,8 @@
 (deftest mongo-development
   (alter-var-root #'mongo-db-dev component/start)
   (is (:db mongo-db-dev) "DB has been added to component")
-  (cg/create-collection! (:db mongo-db-dev) "coll" {:capped true :size 100000 :max 10})
-  (is (cg/collection-exists? (:db mongo-db-dev) "coll"))
-  (cg/drop-coll! (:db mongo-db-dev) "coll")
-  (alter-var-root #'mongo-db-dev component/stop)
-  (is (nil? (:db mongo-db-dev)) "DB is stopped"))
+  (cg/create-collection! (:db mongo-db-dev) "coll" {:capped true :size 100000 :max 10}))
+;  (is (cg/collection-exists? (:db mongo-db-dev) "coll"))
+;  (cg/drop-coll! (:db mongo-db-dev) "coll")
+;  (alter-var-root #'mongo-db-dev component/stop)
+;  (is (nil? (:db mongo-db-dev)) "DB is stopped"))

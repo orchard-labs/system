@@ -1,4 +1,4 @@
-(ns system.components.mongo
+(ns system.components.congo
   (:require [com.stuartsierra.component :as component]
             [somnium.congomongo :as cg]))
 
@@ -9,10 +9,11 @@
       (let [{:keys [mongo db]} (cg/make-connection uri)]
         (assoc component :db db))
       (let [{:keys [mongo db]} (cg/make-connection
-                                     "mongo-dev"
+                                     "congo-dev"
                                      :host "127.0.0.1"
                                      :port 27017)]
-        (assoc component :db db))
+        (println "Connected to local dev db..")
+        (assoc component :db db))))
   (stop [component]
     (assoc component :db nil)))
 
@@ -21,6 +22,3 @@
      (map->Congo {}))
   ([uri]
      (map->Congo {:uri uri})))
-
-
-
